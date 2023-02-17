@@ -5,29 +5,32 @@
 
 
 Console.Clear();
-Console.WriteLine("Enter the numbers separated by a space: ");
-int[] array = UserArray(Console.ReadLine()); //задаем массив элементы считываются из строки 
-//Console.WriteLine($"[{String.Join(" ", array)}]");
-Console.WriteLine();
-Console.WriteLine($"The number of positive numbers in array is {posNum(array)}");
+Console.WriteLine("Enter figures separated by a space: ");
+string strInputNumbers = Console.ReadLine();
 
-int[] UserArray(string numbers) //входные данные числа из строки 
+int[] intNumberArray = UserArray(strInputNumbers); // задаем массив элементы считываются из строки 
+
+Console.WriteLine($"{String.Join(" ", intNumberArray)}"); // проверяем созданный массив
+
+Console.WriteLine($"The number of positive figures in the array is {PositiveNums(intNumberArray)}");
+
+int[] UserArray(string strLocalInputNumbers) // входные данные числа из строки 
 {
-    string[] nums = numbers.Split(' ', StringSplitOptions.RemoveEmptyEntries);//преобразуем строку в массив чисел 
-    int[] res = new int[nums.Length];
-    for (int i = 0; i < res.Length; i++)
+    string[] strArrNumbers = strLocalInputNumbers.Split(' ', StringSplitOptions.RemoveEmptyEntries); // преобразуем строку в массив чисел 
+    int[] intLocalNumberArray = new int[strArrNumbers.Length];
+    for (int i = 0; i < intLocalNumberArray.Length; i++)
     {
-        array[i] = Convert.ToInt32(nums[i]);//заполняем массив числами из строки 
+        intLocalNumberArray[i] = Convert.ToInt32(strArrNumbers[i]); //заполняем массив числами из строки 
     }
-    return res;
+    return intLocalNumberArray;
 }
 
-int posNum(int[] array)
+int PositiveNums(int[] intLocalArray)
 {
     int count = 0;
-    for (int i = 0; i < array.Length; i++)
+    for (int i = 0; i < intLocalArray.Length; i++)
     {
-        if (array[i] > 0) count++;
+        if (intLocalArray[i] > 0) count++;
     }
     return count;
 }

@@ -17,48 +17,58 @@ using static System.Console;
 
 Clear();
 Write("Enter the number of array rows: ");
-int rows = int.Parse(Console.ReadLine());
+int intRows = int.Parse(Console.ReadLine());
 Write("Enter the number of array columns: ");
-int columns = int.Parse(Console.ReadLine());
-Write("Enter the ");
+int intColumns = int.Parse(Console.ReadLine());
+Write("Enter the coordinates separated with space: ");
+string strInputCoord = Console.ReadLine();
 
-int[,] array = GetArray(rows, columns, 0, 9);
-PrintArray(array);
 
-Write($"Sum of diagonal elements is {GetAverage(array)}");
+int[,] intArray = GetArray(intRows, intColumns, 0, 10);
+PrintArray(intArray);
+int[] intCoordArray = CoordArray(strInputCoord); // преобразовали в массив строку из консоли
 
-int[,] GetArray(int m, int n, int min, int max)
+if (intArray.GetLength(0) >= intCoordArray[0] && intArray.GetLength(1) >= intCoordArray[1])
 {
-    int[,] result = new int[m, n];
-    for (int i = 0; i < m; i++)
+    Write($"the number is {intArray[intCoordArray[0], intCoordArray[1]]}");
+}
+
+else Write("There is no such number");
+
+int[] CoordArray(string strLocalInputNumbers)
+{
+    string[] strArrNumbers = strLocalInputNumbers.Split(' ', StringSplitOptions.RemoveEmptyEntries); // преобразуем строку в массив чисел 
+    int[] intLocalNumberArray = new int[strArrNumbers.Length];
+    for (int i = 0; i < intLocalNumberArray.Length; i++)
     {
-        for (int j = 0; j < n; j++)
+        intLocalNumberArray[i] = Convert.ToInt32(strArrNumbers[i]); //заполняем массив числами из строки 
+    }
+    return intLocalNumberArray;
+}
+
+
+int[,] GetArray(int intLocalM, int intLocalN, int intLocalMin, int intLocalMax)
+{
+    int[,] intLocalResult = new int[intLocalM, intLocalN];
+    for (int i = 0; i < intLocalM; i++)
+    {
+        for (int j = 0; j < intLocalN; j++)
         {
-            result[i, j] = new Random().Next(min, max + 1);
+            intLocalResult[i, j] = new Random().Next(intLocalMin, intLocalMax + 1);
         }
     }
-    return result;
-}
-
-int GetAverage(int[,] array)
-{
-    int length = array.GetLength(0) < array.GetLength(1) ? array.GetLength(0) : array.GetLength(1);
-    int sum = 0;
-    for (int i = 0; i < length; i++)
-    {
-        sum += array[i, i];
-    }
-    return sum;
+    return intLocalResult;
 }
 
 
-void PrintArray(int[,] inArray)
+
+void PrintArray(int[,] intLocalArray)
 {
-    for (int i = 0; i < inArray.GetLength(0); i++)
+    for (int i = 0; i < intLocalArray.GetLength(0); i++)
     {
-        for (int j = 0; j < inArray.GetLength(1); j++)
+        for (int j = 0; j < intLocalArray.GetLength(1); j++)
         {
-            Write($"{inArray[i, j]} ");
+            Write($"{intLocalArray[i, j]} ");
         }
         WriteLine();
     }
