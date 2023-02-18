@@ -28,12 +28,13 @@ int[,] intArray = GetArray(intRows, intColumns, 0, 10);
 PrintArray(intArray);
 int[] intCoordArray = CoordArray(strInputCoord); // преобразовали в массив строку из консоли
 
+
 if (intArray.GetLength(0) >= intCoordArray[0] && intArray.GetLength(1) >= intCoordArray[1])
 {
     Write($"the number is {intArray[intCoordArray[0], intCoordArray[1]]}");
 }
+    else Write("There is no such number");
 
-else Write("There is no such number");
 
 int[] CoordArray(string strLocalInputNumbers)
 {

@@ -17,109 +17,62 @@ using static System.Console;
 
 Clear();
 Write("Enter the number of array rows: ");
-int rows = int.Parse(Console.ReadLine());
+int intRows = int.Parse(Console.ReadLine());
 Write("Enter the number of array columns: ");
-int columns = int.Parse(Console.ReadLine());
+int intColumns = int.Parse(Console.ReadLine());
 
-int[,] array = GetArray(rows, columns, 0, 9);
-PrintArray(array);
+int[,] intArray = GetArray(intRows, intColumns, 0, 10);
+PrintArray(intArray);
 
-int[] avr = new int[columns];
+double[] doubAverArray = GetAverage(intArray);
+PrintDoubArray(doubAverArray);
 
-//Write($"arithmetic mean of the elements in each column {}");
-
-int[,] GetArray(int m, int n, int min, int max)
+int[,] GetArray(int intLocalM, int intLocalN, int intLocalMin, int intLocalMax)
 {
-    int[,] result = new int[m, n];
-    for (int i = 0; i < m; i++)
+    int[,] intLocalResult = new int[intLocalM, intLocalN];
+    for (int i = 0; i < intLocalM; i++)
     {
-        for (int j = 0; j < n; j++)
+        for (int j = 0; j < intLocalN; j++)
         {
-            result[i, j] = new Random().Next(min, max + 1);
+            intLocalResult[i, j] = new Random().Next(intLocalMin, intLocalMax + 1);
         }
     }
-    return result;
+    return intLocalResult;
 }
 
-int GetAverage(int[,] array)
+double[] GetAverage(int[,] intLocalArray)
 {
-    for (int i = 0; i < array.GetLength(1); i++)
+    double[] localAverArray = new double[intLocalArray.GetLength(0)];
+
+    int localArrayRows = intLocalArray.GetLength(1);
+
+    for (int i = 0; i < intLocalArray.GetLength(1); i++)
     {
-        for (int j = 0; j < array.GetLength(0); j++)
+        for (int j = 0; j < intLocalArray.GetLength(0); j++)
         {
-            avr[i] += array[j,i];
+            localAverArray[i] += intLocalArray[j, i];
         }
+        localAverArray[i] /= localArrayRows;
     }
-    foreach (double elem in array) sum += item;
-    avr = sum / columns;
-    return avr;
+    return localAverArray;
 }
 
-void PrintArray(int[,] inArray)
+void PrintArray(int[,] intLocalArray)
 {
-    for (int i = 0; i < inArray.GetLength(0); i++)
+    for (int i = 0; i < intLocalArray.GetLength(0); i++)
     {
-        for (int j = 0; j < inArray.GetLength(1); j++)
+        for (int j = 0; j < intLocalArray.GetLength(1); j++)
         {
-            Write($"{inArray[i, j]} ");
+            Write($"{intLocalArray[i, j]} ");
         }
         WriteLine();
     }
 }
-
-
-
-
-
-
-/*
-using System;
-using static System.Console;
-
-Clear();
-Write("Enter the number of array rows: ");
-int rows = int.Parse(Console.ReadLine());
-Write("Enter the number of array columns: ");
-int columns = int.Parse(Console.ReadLine());
-
-int[,] matrix = GetArray(rows, columns, 0, 10);
-
-Write($"Arithmetical meanof each column{GetAverage(matrix)}");
-
-int[,] GetArray(int rows, int columns, int min, int max)
+void PrintDoubArray(double[] doubLocalArray)
 {
-    int[,] result = new int[rows, columns];
-    for (int i = 0; i < matrix.GetLength(0); i++)
+    for (int i = 0; i < doubLocalArray.Length; i++)
     {
-        for (int j = 0; j < matrix.GetLength(1); j++)
-        {
-            matrix[i, j] = new Random().Next(min, max + 1);
-        }
-    }
-    return result;
-}
-
-float[] GetAverage(int[,] matrix)
-{
-    int sum = 0;
-    float avr;
-    //for (int i = 0; i < rows; i++){ sum += matrix[i, j]; }
-    foreach (int elem in matrix) sum += item;
-    avr = sum / columns;
-    return avr;
-}
-
-void PrintArray(int[,] matrix)
-{
-    for (int i = 0; i < matrix.GetLength(0); i++)
-    {
-        for (int j = 0; j < matrix.GetLength(1); j++)
-        {
-            Console.Write($"{matrix[i, j]} ");
-        }
-        Console.WriteLine();
+        Write($"{doubLocalArray[i]} ");
     }
 }
-
-*/
 
